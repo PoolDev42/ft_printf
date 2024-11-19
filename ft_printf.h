@@ -6,11 +6,13 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 11:20:47 by lcalero           #+#    #+#             */
-/*   Updated: 2024/11/19 15:24:12 by lcalero          ###   ########.fr       */
+/*   Updated: 2024/11/19 15:36:58 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
-	
+
+char	*ft_itoa_base(int n, const char *base);
+
 #endif
