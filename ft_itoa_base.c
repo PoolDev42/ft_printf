@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:06:12 by lcalero           #+#    #+#             */
-/*   Updated: 2024/11/19 15:19:04 by lcalero          ###   ########.fr       */
+/*   Updated: 2024/11/20 13:23:12 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static int	count_digits_base(int n, const char *base)
 	return (cpt);
 }
 
-#include <stdio.h>
 char	*ft_itoa_base(int n, const char *base)
 {
 	char	*res;
@@ -62,7 +61,8 @@ char	*ft_itoa_base(int n, const char *base)
 	return (res);
 }
 
-/*int main(void)
+/*#include <stdio.h>
+int main(void)
 {
 	printf("%s", ft_itoa_base(12, "0123456789abcdef"));
 	return (0);
