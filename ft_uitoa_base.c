@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_uitoa_base.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 15:03:10 by lcalero           #+#    #+#             */
-/*   Updated: 2024/11/21 17:50:17 by lcalero          ###   ########.fr       */
+/*   Created: 2024/11/21 14:04:02 by lcalero           #+#    #+#             */
+/*   Updated: 2024/11/21 17:50:31 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 
-static int	count_digits_base(int n, const char *base)
+static int	count_digits_base(unsigned long n, const char *base)
 {
-	long	num;
-	int		cpt;
+	int				cpt;
+	unsigned long	num;
 
 	cpt = 0;
-	num = (long) n;
-	if (num < 0)
-	{
-		cpt++;
-		num *= -1;
-	}
+	num = n;
 	while (num > 0)
 	{
 		num /= ft_strlen(base);
@@ -34,19 +29,17 @@ static int	count_digits_base(int n, const char *base)
 	return (cpt);
 }
 
-char	*ft_itoa_base(int n, const char *base)
+char	*ft_uitoa_base(unsigned long n, const char *base)
 {
-	char	*res;
-	int		i;
-	long	num;
+	char			*res;
+	int				i;
+	unsigned long	num;
 
 	res = malloc(sizeof(char) * (count_digits_base(n, base) + 1));
 	if (res == NULL)
 		return (NULL);
+	num = n;
 	i = count_digits_base(n, base);
-	num = (long) n;
-	if (n < 0)
-		num = -num;
 	res[i--] = '\0';
 	while (num > 0)
 	{
@@ -54,9 +47,14 @@ char	*ft_itoa_base(int n, const char *base)
 		num /= ft_strlen(base);
 		i--;
 	}
-	if (n < 0)
-		res[i] = '-';
 	if (n == 0)
 		res[i] = base[0];
 	return (res);
 }
+
+/*#include <stdio.h>
+/int main(void)
+{
+	printf("%s", ft_uitoa_base(1844674407370955161, "0123456789abcdef"));
+	return (0);
+}*/

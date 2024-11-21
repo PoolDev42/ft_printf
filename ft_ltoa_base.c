@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_ltoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 15:03:10 by lcalero           #+#    #+#             */
-/*   Updated: 2024/11/21 17:50:17 by lcalero          ###   ########.fr       */
+/*   Created: 2024/11/19 14:06:12 by lcalero           #+#    #+#             */
+/*   Updated: 2024/11/21 15:03:51 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 
-static int	count_digits_base(int n, const char *base)
+static int	count_digits_base(long n, const char *base)
 {
 	long	num;
 	int		cpt;
@@ -34,7 +34,7 @@ static int	count_digits_base(int n, const char *base)
 	return (cpt);
 }
 
-char	*ft_itoa_base(int n, const char *base)
+char	*ft_ltoa_base(long n, const char *base)
 {
 	char	*res;
 	int		i;
@@ -60,3 +60,10 @@ char	*ft_itoa_base(int n, const char *base)
 		res[i] = base[0];
 	return (res);
 }
+
+/*#include <stdio.h>
+int main(void)
+{
+	printf("%s", ft_itoa_base(12, "0123456789abcdef"));
+	return (0);
+}*/
