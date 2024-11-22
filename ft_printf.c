@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:41 by lcalero           #+#    #+#             */
-/*   Updated: 2024/11/22 12:44:48 by lcalero          ###   ########.fr       */
+/*   Updated: 2024/11/22 14:12:47 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static void	convert_print_num(int *len, const char *base, va_list args, char sp)
 	char	*s;
 
 	s = NULL;
-	if (sp == 'x' || sp == 'X')
+	if (sp == SP_HEX_LOW || sp == SP_HEX_UPP)
 		s = ft_ltoa_base((long)va_arg(args, unsigned int), base);
-	else if (sp == 'u')
+	else if (sp == SP_UNSIGN)
 		s = ft_uitoa_base((unsigned long)va_arg(args, unsigned), base);
-	else if (sp == 'd' || sp == 'i')
+	else if (sp == SP_DECIMAL || sp == SP_INTEGER)
 		s = ft_itoa_base((long)va_arg(args, int), base);
 	else
 		return ;
@@ -38,26 +38,27 @@ static int	check_specifier(const char *s, int i, va_list args)
 	char	*str;
 	int		len;
 
-	if (s[i] != '%')
+	if (s[i] != '%' || !s[i + 1])
 		return (0);
 	str = NULL;
-	if (s[i + 1] == 'c')
+	if (s[i + 1] == SP_CHAR)
 		return (ft_putchar_fd((char)va_arg(args, int), 1), 1);
-	else if (s[i + 1] == '%')
-		return (ft_putchar_fd('%', 1), 1);
-	else if (s[i + 1] == 's')
+	else if (s[i + 1] == SP_PERCENT)
+		return (ft_putchar_fd(SP_PERCENT, 1), 1);
+	else if (s[i + 1] == SP_STRING)
 		return (ft_handle_str_specifier(args));
-	else if (s[i + 1] == 'd' || s[i + 1] == 'i')
-		return (convert_print_num(&len, "0123456789", args, 'd'), len);
-	if (s[i + 1] == 'p')
+	else if (s[i + 1] == SP_DECIMAL || s[i + 1] == SP_INTEGER)
+		return (convert_print_num(&len, BASE_DECIMAL, args, SP_DECIMAL), len);
+	if (s[i + 1] == SP_POINTER)
 		return (ft_handle_pointer_specifier(args));
-	else if (s[i + 1] == 'u')
-		return (convert_print_num(&len, "0123456789", args, 'u'), len);
-	else if (s[i + 1] == 'x')
-		return (convert_print_num(&len, "0123456789abcdef", args, 'x'), len);
-	else if (s[i + 1] == 'X')
-		return (convert_print_num(&len, "0123456789ABCDEF", args, 'X'), len);
-	return (0);
+	else if (s[i + 1] == SP_UNSIGN)
+		return (convert_print_num(&len, BASE_DECIMAL, args, SP_UNSIGN), len);
+	else if (s[i + 1] == SP_HEX_LOW)
+		return (convert_print_num(&len, BASE_HEX_LOWER, args, SP_HEX_LOW), len);
+	else if (s[i + 1] == SP_HEX_UPP)
+		return (convert_print_num(&len, BASE_HEX_UPPER, args, SP_HEX_UPP), len);
+	ft_putstr_fd("invalid specifier\n", 1);
+	return (-1);
 }
 
 int	ft_printf(const char *format, ...)
@@ -89,10 +90,10 @@ int	ft_printf(const char *format, ...)
 	return (res);
 }
 
-/*int	main(void)
+int	main(void)
 {
 	//int	a = 0;
-	printf("%d", ft_printf("%s\n", "salut les amis"));
+	printf("%d", ft_printf("%s"));
 	//ft_printf(0);
 	return (0);
-}*/
+}
