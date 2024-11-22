@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:32:00 by lcalero           #+#    #+#             */
-/*   Updated: 2024/11/22 13:56:56 by lcalero          ###   ########.fr       */
+/*   Updated: 2024/11/22 16:00:06 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,26 @@
 
 static int	is_valid_spec(char c)
 {
-	if (c == 'c' || c == 's' || c == '%'
-		|| c == 'x' || c == 'X' || c == 'p'
-		|| c == 'u' || c == 'd' || c == 'i')
-		return (1);
-	return (0);
+	return (ft_strchr(VALID_SPECIFIERS, c) != NULL);
 }
 
 int	ft_check_valid_spec(const char *format)
 {
-	int	i;
+	size_t	i;
 
+	if (!format)
+		return (0);
 	i = 0;
 	while (format[i])
 	{
-		if (format[i] == '%' && !is_valid_spec(format[i + 1]))
+		if (format[i] == '%')
 		{
-			ft_putstr_fd("invalid specifier\n", 1);
-			return (0);
+			i++;
+			if (!is_valid_spec(format[i]) || !format[i])
+			{
+				ft_putstr_fd("Error : invalid specifier\n", 1);
+				return (0);
+			}
 		}
 		i++;
 	}

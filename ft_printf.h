@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 11:20:47 by lcalero           #+#    #+#             */
-/*   Updated: 2024/11/22 13:46:05 by lcalero          ###   ########.fr       */
+/*   Updated: 2024/11/22 15:42:19 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define SP_HEX_UPP 'X'
 # define SP_POINTER 'p'
 # define SP_PERCENT '%'
+
+# define VALID_SPECIFIERS "cspdiuxX%"
 
 # define BASE_DECIMAL "0123456789"
 # define BASE_HEX_LOWER "0123456789abcdef"

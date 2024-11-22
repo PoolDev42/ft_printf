@@ -6,14 +6,12 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:41 by lcalero           #+#    #+#             */
-/*   Updated: 2024/11/22 14:12:47 by lcalero          ###   ########.fr       */
+/*   Updated: 2024/11/22 16:29:40 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "ft_printf.h"
-
-#include <stdio.h>
 
 static void	convert_print_num(int *len, const char *base, va_list args, char sp)
 {
@@ -58,7 +56,7 @@ static int	check_specifier(const char *s, int i, va_list args)
 	else if (s[i + 1] == SP_HEX_UPP)
 		return (convert_print_num(&len, BASE_HEX_UPPER, args, SP_HEX_UPP), len);
 	ft_putstr_fd("invalid specifier\n", 1);
-	return (-1);
+	return (1);
 }
 
 int	ft_printf(const char *format, ...)
@@ -67,7 +65,7 @@ int	ft_printf(const char *format, ...)
 	size_t		i;
 	int			res;
 
-	if (!format)
+	if (!format || !ft_check_valid_spec(format))
 		return (-1);
 	va_start(args, format);
 	i = 0;
@@ -88,12 +86,4 @@ int	ft_printf(const char *format, ...)
 	}
 	va_end(args);
 	return (res);
-}
-
-int	main(void)
-{
-	//int	a = 0;
-	printf("%d", ft_printf("%s"));
-	//ft_printf(0);
-	return (0);
 }
