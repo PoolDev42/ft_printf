@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_handle_str_specifier.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 11:20:47 by lcalero           #+#    #+#             */
-/*   Updated: 2024/11/22 12:41:44 by lcalero          ###   ########.fr       */
+/*   Created: 2024/11/22 12:33:59 by lcalero           #+#    #+#             */
+/*   Updated: 2024/11/22 12:41:37 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft/libft.h"
+#include "ft_printf.h"
 
-# include <stdarg.h>
+int	ft_handle_str_specifier(va_list args)
+{
+	char	*str;
 
-char	*ft_itoa_base(int n, const char *base);
-
-char	*ft_ltoa_base(int n, const char *base);
-
-char	*ft_uitoa_base(unsigned long n, const char *base);
-
-int		ft_printf(const char *format, ...);
-
-int		ft_handle_pointer_specifier(va_list args);
-
-int		ft_handle_str_specifier(va_list args);
-
-#endif
+	str = va_arg(args, char *);
+	if (str == NULL)
+	{
+		ft_putstr_fd("(null)", 1);
+		return (6);
+	}
+	ft_putstr_fd(str, 1);
+	return (ft_strlen(str));
+}

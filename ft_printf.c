@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:41 by lcalero           #+#    #+#             */
-/*   Updated: 2024/11/21 19:35:16 by lcalero          ###   ########.fr       */
+/*   Updated: 2024/11/22 12:44:48 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <stdio.h>
 
-static void	ft_fill_string(int *len, const char *base, va_list args, char sp)
+static void	convert_print_num(int *len, const char *base, va_list args, char sp)
 {
 	char	*s;
 
@@ -38,73 +38,49 @@ static int	check_specifier(const char *s, int i, va_list args)
 	char	*str;
 	int		len;
 
-	str = NULL;
 	if (s[i] != '%')
 		return (0);
+	str = NULL;
 	if (s[i + 1] == 'c')
 		return (ft_putchar_fd((char)va_arg(args, int), 1), 1);
 	else if (s[i + 1] == '%')
 		return (ft_putchar_fd('%', 1), 1);
 	else if (s[i + 1] == 's')
-	{
-		str = va_arg(args, char *);
-		if (str == NULL)
-			return (ft_putstr_fd("(null)", 1), 6);
-		return (ft_putstr_fd(str, 1), ft_strlen(str));
-	}
+		return (ft_handle_str_specifier(args));
 	else if (s[i + 1] == 'd' || s[i + 1] == 'i')
-		return (ft_fill_string(&len, "0123456789", args, 'd'), len);
-	return (0);
-}
-
-static int	check_base_specifier(const char *s, int i, va_list args)
-{
-	char	*str;
-	int		len;
-	long	arg;
-
-	len = 0;
-	str = NULL;
+		return (convert_print_num(&len, "0123456789", args, 'd'), len);
 	if (s[i + 1] == 'p')
-	{
-		arg = (long)va_arg(args, void *);
-		if (arg == 0)
-			return (ft_putstr_fd("(nil)", 1), 5);
-		ft_putstr_fd("0x", 1);
-		str = ft_uitoa_base(arg, "0123456789abcdef");
-		ft_putstr_fd(str, 1);
-		len = ft_strlen(str);
-		return (free(str), len + 2);
-	}
+		return (ft_handle_pointer_specifier(args));
 	else if (s[i + 1] == 'u')
-		return (ft_fill_string(&len, "0123456789", args, 'u'), len);
+		return (convert_print_num(&len, "0123456789", args, 'u'), len);
 	else if (s[i + 1] == 'x')
-		return (ft_fill_string(&len, "0123456789abcdef", args, 'x'), len);
+		return (convert_print_num(&len, "0123456789abcdef", args, 'x'), len);
 	else if (s[i + 1] == 'X')
-		return (ft_fill_string(&len, "0123456789ABCDEF", args, 'X'), len);
+		return (convert_print_num(&len, "0123456789ABCDEF", args, 'X'), len);
 	return (0);
 }
 
-int	ft_printf(const char *s, ...)
+int	ft_printf(const char *format, ...)
 {
 	va_list		args;
 	size_t		i;
 	int			res;
 
-	va_start(args, s);
+	if (!format)
+		return (-1);
+	va_start(args, format);
 	i = 0;
 	res = 0;
-	while (s[i])
+	while (format[i])
 	{
-		if (s[i] == '%')
+		if (format[i] == '%')
 		{
-			res += check_specifier(s, i, args);
-			res += check_base_specifier(s, i, args);
+			res += check_specifier(format, i, args);
 			i += 2;
 		}
 		else
 		{
-			ft_putchar_fd(s[i], 1);
+			ft_putchar_fd(format[i], 1);
 			res++;
 			i++;
 		}
@@ -115,8 +91,8 @@ int	ft_printf(const char *s, ...)
 
 /*int	main(void)
 {
-	int	a = 0;
-	printf("%p\n", &a);
-	ft_printf("%p\n", &a);
+	//int	a = 0;
+	printf("%d", ft_printf("%s\n", "salut les amis"));
+	//ft_printf(0);
 	return (0);
 }*/
