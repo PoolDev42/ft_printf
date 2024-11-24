@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:41 by lcalero           #+#    #+#             */
-/*   Updated: 2024/11/22 16:37:56 by lcalero          ###   ########.fr       */
+/*   Updated: 2024/11/24 16:39:59 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,10 @@ static void	convert_print_num(int *len, const char *base, va_list args, char sp)
 
 static int	check_specifier(const char *s, int i, va_list args)
 {
-	char	*str;
 	int		len;
 
 	if (s[i] != '%' || !s[i + 1])
 		return (0);
-	str = NULL;
 	if (s[i + 1] == SP_CHAR)
 		return (ft_putchar_fd((char)va_arg(args, int), 1), 1);
 	else if (s[i + 1] == SP_PERCENT)
