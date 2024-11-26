@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:48:41 by lcalero           #+#    #+#             */
-/*   Updated: 2024/11/24 17:28:18 by lcalero          ###   ########.fr       */
+/*   Updated: 2024/11/26 20:48:38 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_handle_pointer_specifier(va_list args)
 		return (5);
 	}
 	ft_putstr_fd("0x", 1);
-	str = ft_uitoa_base(arg, "0123456789abcdef");
+	str = ft_uitoa_base(arg, BASE_HEX_LOWER);
 	ft_putstr_fd(str, 1);
 	len = ft_strlen(str);
 	free(str);
