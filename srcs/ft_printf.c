@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:41 by lcalero           #+#    #+#             */
-/*   Updated: 2024/11/26 21:11:02 by lcalero          ###   ########.fr       */
+/*   Updated: 2024/11/27 00:34:18 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	ft_printf(const char *format, ...)
 	size_t		i;
 	int			res;
 
-	if (!format && !ft_check_valid_spec(format))
+	if (!format)
 		return (-1);
 	va_start(args, format);
 	i = 0;
@@ -85,10 +85,4 @@ int	ft_printf(const char *format, ...)
 	}
 	va_end(args);
 	return (res);
-}
-#include <stdio.h>
-int	main(void)
-{
-	printf("%d\n", printf("%%%"));
-	printf("%d", ft_printf("%%%"));
 }
