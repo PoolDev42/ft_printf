@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:41 by lcalero           #+#    #+#             */
-/*   Updated: 2024/11/27 00:34:18 by lcalero          ###   ########.fr       */
+/*   Updated: 2024/11/27 00:50:43 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ static int	check_specifier(const char *s, int i, va_list args)
 	if (s[i + 1] == SP_CHAR)
 		return (ft_putchar_fd((char)va_arg(args, int), 1), 1);
 	else if (s[i + 1] == SP_PERCENT)
-		return (ft_putchar_fd(SP_PERCENT, 1), 1);
+		return (ft_putchar_fd('%', 1), 1);
 	else if (s[i + 1] == SP_STRING)
 		return (ft_handle_str_specifier(args));
 	else if (s[i + 1] == SP_DECIMAL || s[i + 1] == SP_INTEGER)
 		return (convert_print_num(&len, BASE_DECIMAL, args, SP_DECIMAL), len);
-	if (s[i + 1] == SP_POINTER)
+	else if (s[i + 1] == SP_POINTER)
 		return (ft_handle_pointer_specifier(args));
 	else if (s[i + 1] == SP_UNSIGN)
 		return (convert_print_num(&len, BASE_DECIMAL, args, SP_UNSIGN), len);
@@ -53,9 +53,7 @@ static int	check_specifier(const char *s, int i, va_list args)
 		return (convert_print_num(&len, BASE_HEX_LOWER, args, SP_HEX_LOW), len);
 	else if (s[i + 1] == SP_HEX_UPP)
 		return (convert_print_num(&len, BASE_HEX_UPPER, args, SP_HEX_UPP), len);
-	ft_putchar_fd(SP_PERCENT, 1);
-	ft_putchar_fd(s[i + 1], 1);
-	return (2);
+	return (0);
 }
 
 int	ft_printf(const char *format, ...)
