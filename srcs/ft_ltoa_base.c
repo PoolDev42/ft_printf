@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:06:12 by lcalero           #+#    #+#             */
-/*   Updated: 2024/11/24 17:28:22 by lcalero          ###   ########.fr       */
+/*   Updated: 2024/11/28 22:48:56 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,3 @@ char	*ft_ltoa_base(long n, const char *base)
 		res[i] = base[0];
 	return (res);
 }
-
-/*#include <stdio.h>
-int main(void)
-{
-	printf("%s", ft_itoa_base(12, "0123456789abcdef"));
-	return (0);
-}*/

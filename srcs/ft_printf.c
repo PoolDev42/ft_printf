@@ -6,7 +6,7 @@
 /*   By: lcalero <lcalero@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:30:41 by lcalero           #+#    #+#             */
-/*   Updated: 2024/11/27 00:50:43 by lcalero          ###   ########.fr       */
+/*   Updated: 2024/11/28 22:47:22 by lcalero          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	convert_print_num(int *len, const char *base, va_list args, char sp)
 	else if (sp == SP_DECIMAL || sp == SP_INTEGER)
 		s = ft_itoa_base((long)va_arg(args, int), base);
 	else
+		return ;
+	if (!s)
 		return ;
 	ft_putstr_fd(s, 1);
 	*len = ft_strlen(s);
